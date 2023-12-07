@@ -1,10 +1,9 @@
-#include <algorithm>
 #include <cmath>
 #include <cstring>
 #include <fstream>
 #include <iostream>
-#include <map>
 #include <numeric>
+#include <set>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -44,24 +43,21 @@ int code(string input) {
     auto splited = split(line, " | ");
 
     auto winning_numbers = split(split(splited[0], ": ")[1], " ");
-
     auto my_numbers = split(splited[1], " ");
 
-    map<string, int> m;
-    for_each(winning_numbers.begin(), winning_numbers.end(),
-             [&m](string number) {
-               if (number != "")
-                 m[number] = 0;
-             });
+    set<string> winning_set;
+    for (const auto &number : winning_numbers) {
+      if (!number.empty()) {
+        winning_set.insert(number);
+      }
+    }
 
-    int count = accumulate(
-        my_numbers.begin(), my_numbers.end(), 0, [&m](int sum, string number) {
-          if (number != "" && m.find(number) != m.end() && m[number] == 0) {
-            m[number] = 1;
-            sum++;
-          }
-          return sum;
-        });
+    int count = 0;
+    for (const auto &number : my_numbers) {
+      if (!number.empty() && winning_set.count(number) > 0) {
+        count++;
+      }
+    }
     return sum + pow(2, count - 1);
   });
 }
