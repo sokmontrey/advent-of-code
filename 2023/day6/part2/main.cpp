@@ -10,8 +10,8 @@
 #include <string>
 #include <vector>
 
-// test : 352
-// input: 741000
+// test : 71503
+// input: 38220708
 
 #define ll long long int
 
