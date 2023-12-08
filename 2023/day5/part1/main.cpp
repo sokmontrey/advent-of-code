@@ -116,7 +116,6 @@ int code(string input) {
 
   return vectorReduce<ll, ll>(
       seeds, LONG_MAX, [](ll final, ll seed) { return min(final, seed); });
-  return 0;
 }
 
 int main(int argc, char *argv[]) {
